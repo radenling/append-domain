@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Append Domain",
+  "author": "Richard Adenling",
+  "version": "1.0",
+  "description": "Appends the current domain to the tab title.",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

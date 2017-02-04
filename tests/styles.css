@@ -1,0 +1,40 @@
+.results {
+    display: table;
+    list-style: none;
+    padding-left: 0;
+    width: 700px;
+}
+
+.test {
+    border-bottom: 1px solid #ccc;
+    border-spacing: 10px;
+    display: table-row;
+    padding: 0.5em 1em;
+    margin-bottom: 1em;
+}
+
+.test > .name {
+    box-sizing: border-box;
+    display: table-cell;
+    padding-right: 1em;
+}
+
+.test > .result {
+    box-sizing: border-box;
+    display: table-cell;;
+    flex-grow: 2;
+    margin-left: 1em;
+    padding: 0.3em 0.5em;
+}
+
+.fail > .result {
+    background: #faa;
+    border-left: 1px solid #dd7171;
+    border-right: 1px solid #dd7171;
+}
+
+.pass > .result {
+    background: #afa;
+    border-left: 1px solid #38b1b2;
+    border-right: 1px solid #38b1b2;
+}
