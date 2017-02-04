@@ -1,6 +1,6 @@
 # Append Domain
 
-This Firefox extension adds "- &lt;current domain name&rt;" to the
+This Firefox extension adds "- &lt;current domain name&gt;" to the
 title of all open tabs. I'm a Keepass user and like to use the
 autotype feature. It determines which password to use based on the
 window name. This is a problem in Firefox since the page title is used
