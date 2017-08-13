@@ -10,6 +10,7 @@ function uidCurrent() {
 }
 
 const pageTemplate = `
+  <!DOCTYPE html>
   <html>
     <head>
       <title>#{title}</title>
@@ -22,6 +23,7 @@ const pageTemplate = `
 `;
 
 const headlessTemplate = `
+  <!DOCTYPE html>
   <html>
     <body>
       <script>function after(ms, f) { setTimeout(f, ms); }</script>
@@ -57,6 +59,7 @@ class TestPage {
 
     this.childWindow = window.open('', '');
     this.childWindow.document.write(contentsWithEnd);
+    this.childWindow.document.close();
   }
 
   getTitle() {
@@ -125,7 +128,7 @@ function fail(uid, reason) {
 
 let tests = {
   testStaticTitle: {
-    script: '#{end};',
+    script: 'after(200, () => #{end});',
     assertion: page => {
       assert('Static title - localpath', page.getTitle());
     }
