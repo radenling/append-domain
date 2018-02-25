@@ -1,3 +1,5 @@
+'use strict';
+
 class Elements {
   constructor(doc) {
     this.doc = doc;
@@ -70,8 +72,27 @@ class AppendDomain {
   watchHead() {
     this.stopWatching();
     const head = this.elements.getHead();
-    if(head)
+
+    if(head) {
+      // Add a title in case the page never does
+      this.addPlaceholderTitle(head);
+
       this.headObserver.observe(head, {childList: true});
+    }
+  }
+
+  addPlaceholderTitle(head) {
+    this.placeholderTitle = document.createElement('title');
+    head.appendChild(this.placeholderTitle);
+    this.updateTitle(this.placeholderTitle);
+  }
+
+  removePlaceholderTitle() {
+    if(!this.placeholderTitle)
+      return;
+
+    this.placeholderTitle.parentNode.removeChild(this.placeholderTitle);
+    this.placeholderTitle = null;
   }
 
   run() {
@@ -90,6 +111,8 @@ class AppendDomain {
       if(mutations[i].type == 'childList') {
         for(let j = 0; j < mutations[i].addedNodes.length; j++) {
           if(mutations[i].addedNodes[j].nodeName == 'TITLE') {
+            // Remove our placeholder if the page appends its own title
+            this.removePlaceholderTitle();
             this.watchTitle();
           }
         }

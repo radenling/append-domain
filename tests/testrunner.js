@@ -184,6 +184,24 @@ let tests = {
     assertion: page => {
       assert('Dynamic page - localpath', page.getTitle());
     }
+  },
+  testPageWithoutTitle: {
+    template: headlessTemplate,
+    script: `const head = document.getElementsByTagName('head')[0];
+             document.documentElement.appendChild(head);
+             after(200, () => {#{end}});`,
+    assertion: page => {
+      assert(' - localpath', page.getTitle());
+    }
+  },
+  testAppendingDelayedTitle: {
+    template: headlessTemplate,
+    script: `const head = document.getElementsByTagName('head')[0];
+             after(200, () => head.appendChild(document.createElement('title')));
+             after(400, () => {#{end}});`,
+    assertion: page => {
+      assert(' - localpath', page.getTitle());
+    }
   }
 };
 
